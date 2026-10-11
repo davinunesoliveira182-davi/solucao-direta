@@ -349,15 +349,153 @@
       return elemento;
     }
 
-    function gerarSolucao() {
-      const mensagem = campo.value.trim();
+    
+function gerarSolucao() {
+  const mensagem = campo.value.trim();
 
-      if (mensagem.length < 5) {
-        statusTexto.textContent =
-          "Escreva ou diga um pouco mais sobre o problema.";
-        campo.focus();
-        return;
+  if (!mensagem) {
+    statusTexto.textContent =
+      "Digite ou fale alguma coisa para começarmos!";
+    campo.focus();
+    return;
+  }
+
+  const texto = normalizar(mensagem);
+  let titulo = "";
+  let introducao = "";
+  let passos = [];
+
+  // Respostas para conversas comuns
+  if (/^(oi|ola|e ai|eai|opa|oie)[!.?, ]*$/.test(texto)) {
+    titulo = "Olá! 👋";
+    introducao =
+      "Que bom ter você aqui no Solução Direta! Como posso ajudar hoje?";
+    passos = [
+      "Conte um problema que você quer resolver.",
+      "Peça ideias para organizar sua rotina.",
+      "Ou simplesmente converse comigo!"
+    ];
+
+  } else if (
+    /^(tudo bem|como vai|como voce esta|como voce ta)[!.?, ]*$/.test(texto) ||
+    /^(oi|ola)[, ]+tudo bem[!.?, ]*$/.test(texto)
+  ) {
+    titulo = "Tudo bem por aqui! 😊";
+    introducao =
+      "Obrigado por perguntar! Estou pronto para ajudar você.";
+    passos = [
+      "E você, como está?",
+      "Tem alguma dúvida ou problema para resolver?",
+      "Pode escrever ou usar o microfone para me contar."
+    ];
+
+  } else if (
+    /^(obrigado|obrigada|valeu|muito obrigado|muito obrigada)[!.?, ]*$/.test(texto)
+  ) {
+    titulo = "Por nada! 💙";
+    introducao =
+      "Fico feliz em poder ajudar. Você pode contar comigo para organizar suas ideias.";
+    passos = [
+      "Se precisar, podemos pensar em outra solução.",
+      "Você também pode me contar um novo problema."
+    ];
+
+  } else if (
+    texto.includes("preciso de ajuda") ||
+    texto.includes("me ajuda") ||
+    texto.includes("pode me ajudar") ||
+    texto.includes("quero ajuda")
+  ) {
+    titulo = "Claro, vamos resolver isso juntos! 💡";
+    introducao =
+      "Conte um pouco mais sobre o que está acontecendo para eu mostrar sugestões que combinem com sua situação.";
+    passos = [
+      "Explique o que está acontecendo.",
+      "Diga o que você gostaria de mudar.",
+      "Vamos encontrar um primeiro passo possível."
+    ];
+
+  } else if (
+    /^(tchau|ate logo|ate mais|adeus|falou)[!.?, ]*$/.test(texto)
+  ) {
+    titulo = "Até mais! 👋";
+    introducao =
+      "Obrigado por visitar o Solução Direta. Estarei aqui quando você quiser voltar.";
+    passos = [
+      "Cuide-se!",
+      "Volte quando precisar de novas ideias."
+    ];
+
+  } else {
+    // Se não for uma conversa comum, procura o assunto
+    let tema = null;
+    let maiorPontuacao = 0;
+
+    for (const assunto of assuntos) {
+      let pontos = 0;
+
+      for (const palavra of assunto.palavras) {
+        if (texto.includes(normalizar(palavra))) {
+          pontos += palavra.length >= 7 ? 2 : 1;
+        }
       }
+
+      if (pontos > maiorPontuacao) {
+        maiorPontuacao = pontos;
+        tema = assunto;
+      }
+    }
+
+    if (tema) {
+      titulo = tema.nome + " 💡";
+      introducao = tema.inicio;
+      passos = tema.passos;
+    } else {
+      titulo = "Vamos pensar nisso juntos! 💡";
+      introducao =
+        "Obrigado por compartilhar sua mensagem. Ainda não identifiquei um assunto específico, mas podemos começar organizando suas ideias.";
+      passos = [
+        "Pense no que você gostaria de conseguir.",
+        "Identifique o que está dificultando esse objetivo.",
+        "Escolha uma pequena ação para começar.",
+        "Se quiser, explique melhor a situação para receber sugestões mais direcionadas."
+      ];
+    }
+  }
+
+  // Mostra a resposta na página
+  resultado.replaceChildren();
+  resultado.appendChild(criarTexto("h2", titulo));
+  resultado.appendChild(criarTexto("p", introducao));
+
+  const lista = document.createElement("ul");
+
+  for (const passo of passos) {
+    lista.appendChild(criarTexto("li", passo));
+  }
+
+  resultado.appendChild(lista);
+  resultado.appendChild(
+    criarTexto(
+      "p",
+      "Sou um assistente baseado em respostas preparadas no site, não uma inteligência artificial. Minhas sugestões podem ajudar você a encontrar um próximo passo."
+    )
+  );
+
+  resultado.lastElementChild.className = "aviso";
+  resultado.style.display = "block";
+
+  ultimaResposta =
+    titulo + " " + introducao + " " + passos.join(" ");
+
+  statusTexto.textContent = "Resposta pronta!";
+
+  resultado.scrollIntoView({
+    behavior: "smooth",
+    block: "nearest"
+  });
+}
+
 
       const texto = normalizar(mensagem);
 
