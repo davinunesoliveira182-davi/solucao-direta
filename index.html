@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -9,490 +10,480 @@
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
     }
 
     body {
-      font-family: Arial, sans-serif;
-      color: #172033;
+      margin: 0;
       min-height: 100vh;
-      background-color: #edf4ff;
-      background-image:
-        linear-gradient(#f4f8ffb8, #f4f8ffb8),
-        url("fundo.png");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      font-family: Arial, sans-serif;
+      color: #183153;
+      background: linear-gradient(135deg, #eaf5ff, #f8fbff);
+      display: flex;
+      justify-content: center;
+      padding: 24px 14px;
     }
 
-    main {
-      width: min(850px, 100%);
-      margin: auto;
-      padding: 45px 20px 25px;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .etiqueta {
-      display: inline-block;
-      padding: 9px 16px;
-      margin-bottom: 18px;
-      border-radius: 30px;
-      background: #e1ebff;
-      color: #2458e6;
-      font-size: 13px;
-      font-weight: bold;
+    .container {
+      width: 100%;
+      max-width: 720px;
+      align-self: flex-start;
+      background: white;
+      padding: 28px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px #17385c18;
     }
 
     h1 {
-      font-size: clamp(32px, 6vw, 48px);
-      margin-bottom: 16px;
+      text-align: center;
+      color: #1769aa;
+      margin-top: 0;
     }
 
-    h1 span {
-      color: #2458e6;
-    }
-
-    header p {
-      color: #52617a;
-      font-size: 17px;
-      line-height: 1.7;
-    }
-
-    .painel {
-      padding: 28px;
-      background: white;
-      border: 1px solid #dce7f8;
-      border-radius: 22px;
-      box-shadow: 0 15px 45px #244a8a18;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 12px;
-      font-weight: bold;
-      font-size: 17px;
+    .subtitulo {
+      text-align: center;
+      color: #52677d;
+      line-height: 1.6;
     }
 
     textarea {
       width: 100%;
-      min-height: 145px;
-      padding: 16px;
-      border: 1px solid #cbd7ea;
-      border-radius: 13px;
+      min-height: 130px;
       resize: vertical;
+      padding: 15px;
+      border: 2px solid #c9dced;
+      border-radius: 12px;
       font: inherit;
       font-size: 16px;
-      line-height: 1.6;
+      outline-color: #2785d0;
     }
 
-    textarea:focus {
-      outline: 2px solid #3975f6;
-    }
-
-    .dica {
-      margin: 12px 0 18px;
-      color: #718096;
-      font-size: 13px;
-      line-height: 1.6;
+    .botoes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
     }
 
     button {
-      width: 100%;
-      padding: 15px;
-      margin-top: 9px;
+      padding: 14px 10px;
       border: none;
-      border-radius: 12px;
-      background: #2458e6;
-      color: white;
+      border-radius: 10px;
       font-size: 15px;
       font-weight: bold;
       cursor: pointer;
+      color: white;
+      background: #1769aa;
     }
 
     button:hover {
-      filter: brightness(1.08);
+      filter: brightness(0.92);
     }
 
-    .microfone,
-    .audio,
+    button:focus-visible {
+      outline: 3px solid #ffbd45;
+      outline-offset: 3px;
+    }
+
+    .microfone {
+      background: #16845b;
+    }
+
     .parar {
-      background: #e8efff;
-      color: #214bd0;
+      background: #b93838;
+    }
+
+    .audio {
+      background: #6746a5;
     }
 
     #status {
-      margin-top: 13px;
-      color: #52617a;
-      font-size: 13px;
-      line-height: 1.6;
+      color: #52677d;
+      min-height: 24px;
+      margin: 16px 0;
     }
 
     #resultado {
       display: none;
-      margin-top: 24px;
-      padding: 22px;
-      border: 1px solid #d6e4ff;
-      border-radius: 15px;
-      background: #f4f8ff;
+      margin-top: 20px;
+      padding: 20px;
+      background: #f0f7ff;
+      border-left: 5px solid #2785d0;
+      border-radius: 10px;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
     }
 
     #resultado h2 {
-      margin-bottom: 13px;
-      color: #2458e6;
-      font-size: 22px;
+      color: #1769aa;
+      margin-top: 0;
     }
 
-    #resultado p {
-      margin-bottom: 13px;
-      line-height: 1.7;
-    }
-
-    #resultado ul {
-      padding-left: 22px;
-      margin-bottom: 16px;
-      line-height: 1.9;
-    }
-
-    .aviso {
-      color: #52617a;
+    .dica {
+      color: #52677d;
       font-size: 13px;
+      line-height: 1.6;
+      margin-top: 20px;
     }
 
-    footer {
-      padding: 25px 15px;
-      text-align: center;
-      color: #52617a;
-      font-size: 13px;
-    }
-
-    @media (max-width: 500px) {
-      main {
-        padding: 30px 14px 20px;
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px 15px;
       }
 
-      .painel {
-        padding: 19px;
+      .botoes {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 
 <body>
-  <main>
-    <header>
-      <div class="etiqueta">SEU PRÓXIMO PASSO COMEÇA AQUI</div>
+  <main class="container">
+    <h1>💡 Solução Direta</h1>
 
-      <h1>Todo problema merece uma <span>solução.</span></h1>
+    <p class="subtitulo">
+      Escreva ou fale comigo. Vamos organizar suas ideias
+      e encontrar possíveis caminhos para seguir.
+    </p>
 
-      <p>
-        Conte o que está acontecendo, organize suas ideias
-        e descubra possíveis caminhos para seguir em frente.
-      </p>
-    </header>
+    <label for="mensagem"><strong>Sua mensagem:</strong></label>
 
-    <section class="painel">
-      <label for="problema">
-        Qual problema você quer resolver?
-      </label>
+    <textarea
+      id="mensagem"
+      placeholder="Escreva aqui ou clique em Falar para usar o microfone..."
+    ></textarea>
 
-      <textarea
-        id="problema"
-        placeholder="Ex.: Tenho dificuldade para organizar meu tempo..."
-      ></textarea>
+    <div class="botoes">
+      <button id="responder">💬 Responder</button>
+      <button id="microfone" class="microfone">🎤 Falar</button>
+      <button id="ouvir" class="audio">🔊 Ouvir resposta</button>
+      <button id="parar" class="parar">⏹ Parar áudio</button>
+    </div>
 
-      <p class="dica">
-        Você pode escrever ou usar o microfone.
-        Não informe senhas nem dados pessoais.
-      </p>
+    <p id="status" role="status" aria-live="polite">
+      Pronto para conversar!
+    </p>
 
-      <button id="resolver">
-        Encontrar possíveis soluções →
-      </button>
+    <section id="resultado" aria-live="polite"></section>
 
-      <button class="microfone" id="microfone">
-        🎤 Falar em vez de digitar
-      </button>
-
-      <button class="audio" id="ouvir">
-        🔊 Ouvir a resposta
-      </button>
-
-      <button class="parar" id="parar">
-        ⏹ Parar áudio
-      </button>
-
-      <p id="status" role="status" aria-live="polite">
-        Escreva sua mensagem ou toque no microfone para começar.
-      </p>
-
-      <section id="resultado" aria-live="polite"></section>
-    </section>
+    <p class="dica">
+      O microfone pode exigir permissão do navegador.
+      Este assistente usa respostas automáticas e não substitui
+      orientação profissional em situações importantes.
+    </p>
   </main>
 
-  <footer>
-    © 2026 Solução Direta · Pequenos passos, grandes mudanças.
-  </footer>
-
   <script>
-    const campo = document.getElementById("problema");
-    const resultado = document.getElementById("resultado");
+    const campo = document.getElementById("mensagem");
+    const botaoResponder = document.getElementById("responder");
+    const botaoMicrofone = document.getElementById("microfone");
+    const botaoOuvir = document.getElementById("ouvir");
+    const botaoParar = document.getElementById("parar");
     const statusTexto = document.getElementById("status");
+    const resultado = document.getElementById("resultado");
 
     let ultimaResposta = "";
     let reconhecimento = null;
+    let ouvindoMicrofone = false;
 
     function normalizar(texto) {
-      return texto.toLowerCase()
+      return texto
+        .toLocaleLowerCase("pt-BR")
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "");
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^\p{L}\p{N}\s]/gu, " ")
+        .replace(/\s+/g, " ")
+        .trim();
     }
 
-    const assuntos = [
-      {
-        nome: "Estudos e escola",
-        palavras: ["estudar", "estudo", "prova", "escola", "aprender", "materia", "professor", "nota"],
-        inicio: "Vamos dividir os estudos em etapas menores.",
-        passos: [
-          "Identifique qual assunto está mais difícil.",
-          "Estude um tópico por vez durante 20 minutos.",
-          "Pratique com exercícios sem consultar a resposta imediatamente.",
-          "Peça ajuda a um professor se continuar com dúvidas."
-        ]
-      },
-      {
-        nome: "Tempo e organização",
-        palavras: ["tempo", "organizar", "tarefa", "rotina", "agenda", "atrasado", "procrastinar", "esquecer"],
-        inicio: "Uma rotina simples pode ajudar a deixar as tarefas mais claras.",
-        passos: [
-          "Anote as tarefas que precisa realizar.",
-          "Escolha as três prioridades mais importantes.",
-          "Comece por uma tarefa pequena.",
-          "Confira o que conseguiu fazer no final do dia."
-        ]
-      },
-      {
-        nome: "Dinheiro e economia",
-        palavras: ["dinheiro", "gastar", "economizar", "economia", "divida", "preco", "comprar", "orcamento"],
-        inicio: "Entender seus gastos é um bom primeiro passo.",
-        passos: [
-          "Anote o dinheiro disponível e os gastos.",
-          "Separe necessidades de compras que podem esperar.",
-          "Defina uma meta de economia realista.",
-          "Peça orientação a alguém de confiança antes de assumir compromissos financeiros."
-        ]
-      },
-      {
-        nome: "Trabalho e negócios",
-        palavras: ["trabalho", "emprego", "negocio", "cliente", "vender", "empresa", "curriculo", "chefe"],
-        inicio: "Vamos transformar a situação em ações que você pode testar.",
-        passos: [
-          "Defina qual resultado deseja alcançar.",
-          "Identifique o principal obstáculo.",
-          "Converse com alguém que conheça essa área.",
-          "Teste uma mudança pequena e observe o resultado."
-        ]
-      },
-      {
-        nome: "Tecnologia e programação",
-        palavras: ["computador", "celular", "internet", "site", "github", "codigo", "programar", "aplicativo", "erro", "wifi"],
-        inicio: "Problemas de tecnologia ficam mais fáceis quando você testa uma coisa por vez.",
-        passos: [
-          "Descreva o que acontece e anote a mensagem de erro.",
-          "Confira a conexão e atualize a página.",
-          "Mude apenas uma coisa por vez para identificar o problema.",
-          "Procure a documentação oficial se o erro continuar."
-        ]
-      },
-      {
-        nome: "Amizades e relacionamentos",
-        palavras: ["amigo", "amiga", "amizade", "relacionamento", "namoro", "briga", "familia", "discussao"],
-        inicio: "Conversar com respeito e entender seus limites pode ajudar.",
-        passos: [
-          "Pense no que aconteceu e em como você se sentiu.",
-          "Escolha um momento calmo para conversar, se for seguro.",
-          "Explique seu ponto de vista e escute o outro lado.",
-          "Se houver ameaça ou violência, procure ajuda de alguém de confiança."
-        ]
-      },
-      {
-        nome: "Estresse e motivação",
-        palavras: ["estresse", "ansioso", "ansiedade", "preocupado", "desanimado", "motivacao", "nervoso", "medo"],
-        inicio: "Você não precisa resolver tudo de uma vez. Comece por algo pequeno.",
-        passos: [
-          "Faça uma pausa e respire devagar por alguns instantes.",
-          "Anote o que está ao seu alcance mudar.",
-          "Escolha uma ação simples para hoje.",
-          "Converse com alguém de confiança se estiver difícil lidar com a situação."
-        ]
-      },
-      {
-        nome: "Casa e tarefas do dia a dia",
-        palavras: ["casa", "limpar", "limpeza", "quarto", "cozinha", "louca", "consertar"],
-        inicio: "Organizar as tarefas por etapas pode facilitar o dia a dia.",
-        passos: [
-          "Liste o que precisa ser feito.",
-          "Escolha o que é mais urgente.",
-          "Comece por uma tarefa pequena e segura.",
-          "Peça ajuda para tarefas que envolvam riscos ou ferramentas perigosas."
-        ]
-      }
-    ];
+    function mostrarResposta(titulo, mensagem, passos = []) {
+      resultado.replaceChildren();
 
-    function criarTexto(tag, texto) {
-      const elemento = document.createElement(tag);
-      elemento.textContent = texto;
-      return elemento;
-    }
+      const h2 = document.createElement("h2");
+      h2.textContent = titulo;
+      resultado.appendChild(h2);
 
-function gerarSolucao() {
-  const mensagem = campo.value.trim();
+      const p = document.createElement("p");
+      p.textContent = mensagem;
+      resultado.appendChild(p);
 
-  if (!mensagem) {
-    statusTexto.textContent =
-      "Digite ou fale alguma coisa para começarmos!";
-    campo.focus();
-    return;
-  }
+      if (passos.length > 0) {
+        const lista = document.createElement("ul");
 
-  const texto = normalizar(mensagem);
-  let titulo = "";
-  let introducao = "";
-  let passos = [];
+        passos.forEach(function(passo) {
+          const item = document.createElement("li");
+          item.textContent = passo;
+          lista.appendChild(item);
+        });
 
-  // Respostas para conversas comuns
-  if (/^(oi|ola|e ai|eai|opa|oie)[!.?, ]*$/.test(texto)) {
-    titulo = "Olá! 👋";
-    introducao =
-      "Que bom ter você aqui no Solução Direta! Como posso ajudar hoje?";
-    passos = [
-      "Conte um problema que você quer resolver.",
-      "Peça ideias para organizar sua rotina.",
-      "Ou simplesmente converse comigo!"
-    ];
-
-  } else if (
-    /^(tudo bem|como vai|como voce esta|como voce ta)[!.?, ]*$/.test(texto) ||
-    /^(oi|ola)[, ]+tudo bem[!.?, ]*$/.test(texto)
-  ) {
-    titulo = "Tudo bem por aqui! 😊";
-    introducao =
-      "Obrigado por perguntar! Estou pronto para ajudar você.";
-    passos = [
-      "E você, como está?",
-      "Tem alguma dúvida ou problema para resolver?",
-      "Pode escrever ou usar o microfone para me contar."
-    ];
-
-  } else if (
-    /^(obrigado|obrigada|valeu|muito obrigado|muito obrigada)[!.?, ]*$/.test(texto)
-  ) {
-    titulo = "Por nada! 💙";
-    introducao =
-      "Fico feliz em poder ajudar. Você pode contar comigo para organizar suas ideias.";
-    passos = [
-      "Se precisar, podemos pensar em outra solução.",
-      "Você também pode me contar um novo problema."
-    ];
-
-  } else if (
-    texto.includes("preciso de ajuda") ||
-    texto.includes("me ajuda") ||
-    texto.includes("pode me ajudar") ||
-    texto.includes("quero ajuda")
-  ) {
-    titulo = "Claro, vamos resolver isso juntos! 💡";
-    introducao =
-      "Conte um pouco mais sobre o que está acontecendo para eu mostrar sugestões que combinem com sua situação.";
-    passos = [
-      "Explique o que está acontecendo.",
-      "Diga o que você gostaria de mudar.",
-      "Vamos encontrar um primeiro passo possível."
-    ];
-
-  } else if (
-    /^(tchau|ate logo|ate mais|adeus|falou)[!.?, ]*$/.test(texto)
-  ) {
-    titulo = "Até mais! 👋";
-    introducao =
-      "Obrigado por visitar o Solução Direta. Estarei aqui quando você quiser voltar.";
-    passos = [
-      "Cuide-se!",
-      "Volte quando precisar de novas ideias."
-    ];
-
-  } else {
-    // Se não for uma conversa comum, procura o assunto
-    let tema = null;
-    let maiorPontuacao = 0;
-
-    for (const assunto of assuntos) {
-      let pontos = 0;
-
-      for (const palavra of assunto.palavras) {
-        if (texto.includes(normalizar(palavra))) {
-          pontos += palavra.length >= 7 ? 2 : 1;
-        }
+        resultado.appendChild(lista);
       }
 
-      if (pontos > maiorPontuacao) {
-        maiorPontuacao = pontos;
-        tema = assunto;
+      resultado.style.display = "block";
+
+      ultimaResposta = titulo + ". " + mensagem + " " +
+        passos.join(". ");
+
+      statusTexto.textContent = "Resposta pronta!";
+
+      resultado.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    }
+
+    function gerarSolucao() {
+      const mensagem = campo.value.trim();
+
+      if (!mensagem) {
+        statusTexto.textContent =
+          "Digite ou fale alguma coisa primeiro.";
+        campo.focus();
+        return;
+      }
+
+      const texto = normalizar(mensagem);
+
+      if (/^(oi|ola|opa|oie|e ai|eai)$/.test(texto)) {
+        mostrarResposta(
+          "Olá! 👋",
+          "Que bom conversar com você! Como posso ajudar hoje?",
+          [
+            "Conte algo que aconteceu com você.",
+            "Faça uma pergunta.",
+            "Peça ideias para organizar suas tarefas."
+          ]
+        );
+        return;
+      }
+
+      if (/^(tudo bem|como vai|como voce esta|como voce ta)$/.test(texto)) {
+        mostrarResposta(
+          "Tudo bem por aqui! 😊",
+          "Obrigado por perguntar. Estou pronto para ajudar você. E você, como está?"
+        );
+        return;
+      }
+
+      if (/^(bom dia|boa tarde|boa noite)$/.test(texto)) {
+        mostrarResposta(
+          "Olá! ☀️",
+          mensagem + "! Seja bem-vindo ao Solução Direta. O que você gostaria de conversar hoje?"
+        );
+        return;
+      }
+
+      if (/^(obrigado|obrigada|valeu|muito obrigado|muito obrigada)$/.test(texto)) {
+        mostrarResposta(
+          "Por nada! 💙",
+          "Fico feliz em ajudar. Pode voltar sempre que quiser conversar."
+        );
+        return;
+      }
+
+      if (/^(tchau|ate logo|ate mais|adeus|falou)$/.test(texto)) {
+        mostrarResposta(
+          "Até mais! 👋",
+          "Obrigado por conversar comigo. Espero que seu dia seja bom!"
+        );
+        return;
+      }
+
+      if (/^(quem e voce|o que voce faz|como voce funciona)$/.test(texto)) {
+        mostrarResposta(
+          "Sobre o Solução Direta 💡",
+          "Sou um assistente simples que organiza mensagens e oferece sugestões preparadas para ajudar você a pensar nos próximos passos.",
+          [
+            "Você pode escrever ou falar.",
+            "Posso apresentar sugestões gerais.",
+            "Você pode ouvir minha resposta usando o botão de áudio."
+          ]
+        );
+        return;
+      }
+
+      if (
+        texto.includes("triste") ||
+        texto.includes("desanimado") ||
+        texto.includes("ansioso") ||
+        texto.includes("preocupado")
+      ) {
+        mostrarResposta(
+          "Vamos com calma 💙",
+          "Parece que isso está pesando para você. Não preciso que resolva tudo de uma vez.",
+          [
+            "Tente identificar o que mais está incomodando.",
+            "Escolha uma pequena coisa que possa ajudar agora.",
+            "Se quiser, conte mais detalhes para organizar suas ideias."
+          ]
+        );
+        return;
+      }
+
+      if (
+        texto.includes("trabalho") ||
+        texto.includes("emprego") ||
+        texto.includes("estudar") ||
+        texto.includes("estudo")
+      ) {
+        mostrarResposta(
+          "Vamos organizar seu objetivo 📚",
+          "Podemos dividir sua situação em partes menores para encontrar um caminho possível.",
+          [
+            "Defina o que você quer alcançar.",
+            "Identifique a principal dificuldade.",
+            "Escolha uma ação pequena para começar."
+          ]
+        );
+        return;
+      }
+
+      if (
+        texto.includes("problema") ||
+        texto.includes("resolver") ||
+        texto.includes("dificuldade") ||
+        texto.includes("ajuda")
+      ) {
+        mostrarResposta(
+          "Vamos pensar em uma solução 💡",
+          "Para começar, é útil entender o que está acontecendo e o que você gostaria que fosse diferente.",
+          [
+            "Descreva o problema em uma frase.",
+            "Separe o que você pode controlar do que não pode.",
+            "Pense em duas possíveis ações.",
+            "Escolha a opção mais simples e segura para começar."
+          ]
+        );
+        return;
+      }
+
+      mostrarResposta(
+        "Obrigado por compartilhar! 💬",
+        "Recebi sua mensagem: " + mensagem +
+        ". Ainda não consigo compreender perfeitamente qualquer assunto, mas posso ajudar você a organizar essa ideia.",
+        [
+          "Explique o que aconteceu.",
+          "Diga qual resultado você gostaria de alcançar.",
+          "Pergunte algo mais específico para receber sugestões melhores."
+        ]
+      );
+    }
+
+    function pararAudio() {
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+      statusTexto.textContent = "Áudio parado.";
+    }
+
+    function ouvirResposta() {
+      if (!ultimaResposta) {
+        statusTexto.textContent =
+          "Primeiro escreva uma mensagem e clique em Responder.";
+        return;
+      }
+
+      if (!("speechSynthesis" in window)) {
+        statusTexto.textContent =
+          "Seu navegador não oferece leitura de voz. Tente usar o Chrome.";
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+
+      const fala = new SpeechSynthesisUtterance(ultimaResposta);
+      fala.lang = "pt-BR";
+      fala.rate = 1;
+      fala.pitch = 1;
+
+      fala.onstart = function() {
+        statusTexto.textContent = "Lendo a resposta em voz alta...";
+      };
+
+      fala.onend = function() {
+        statusTexto.textContent = "Leitura concluída.";
+      };
+
+      fala.onerror = function() {
+        statusTexto.textContent =
+          "Não foi possível reproduzir a voz neste momento.";
+      };
+
+      window.speechSynthesis.speak(fala);
+    }
+
+    function configurarMicrofone() {
+      const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        statusTexto.textContent =
+          "O reconhecimento de voz não está disponível neste navegador. Use o Chrome atualizado ou digite sua mensagem.";
+        return;
+      }
+
+      if (ouvindoMicrofone && reconhecimento) {
+        reconhecimento.stop();
+        return;
+      }
+
+      reconhecimento = new SpeechRecognition();
+      reconhecimento.lang = "pt-BR";
+      reconhecimento.continuous = false;
+      reconhecimento.interimResults = false;
+      ouvindoMicrofone = true;
+
+      reconhecimento.onstart = function() {
+        statusTexto.textContent = "Pode falar. Estou ouvindo...";
+        botaoMicrofone.textContent = "🎤 Ouvindo...";
+      };
+
+      reconhecimento.onresult = function(event) {
+        const transcricao = event.results[0][0].transcript;
+        campo.value = transcricao;
+        statusTexto.textContent = "Voz reconhecida. Preparando resposta...";
+        gerarSolucao();
+      };
+
+      reconhecimento.onerror = function(event) {
+        const erros = {
+          "not-allowed": "Permita o acesso ao microfone nas configurações do navegador.",
+          "no-speech": "Não ouvi sua voz. Tente falar novamente.",
+          "audio-capture": "Não encontrei um microfone disponível.",
+          "network": "O reconhecimento de voz falhou por um problema de rede."
+        };
+
+        statusTexto.textContent =
+          erros[event.error] || "O microfone não funcionou. Tente novamente.";
+      };
+
+      reconhecimento.onend = function() {
+        ouvindoMicrofone = false;
+        botaoMicrofone.textContent = "🎤 Falar";
+      };
+
+      try {
+        reconhecimento.start();
+      } catch (erro) {
+        ouvindoMicrofone = false;
+        botaoMicrofone.textContent = "🎤 Falar";
+        statusTexto.textContent =
+          "Não consegui iniciar o microfone. Tente novamente.";
       }
     }
 
-    if (tema) {
-      titulo = tema.nome + " 💡";
-      introducao = tema.inicio;
-      passos = tema.passos;
-    } else {
-      titulo = "Vamos pensar nisso juntos! 💡";
-      introducao =
-        "Obrigado por compartilhar sua mensagem. Ainda não identifiquei um assunto específico, mas podemos começar organizando suas ideias.";
-      passos = [
-        "Pense no que você gostaria de conseguir.",
-        "Identifique o que está dificultando esse objetivo.",
-        "Escolha uma pequena ação para começar.",
-        "Se quiser, explique melhor a situação para receber sugestões mais direcionadas."
-      ];
-    }
-  }
+    botaoResponder.addEventListener("click", gerarSolucao);
+    botaoMicrofone.addEventListener("click", configurarMicrofone);
+    botaoOuvir.addEventListener("click", ouvirResposta);
+    botaoParar.addEventListener("click", pararAudio);
 
-  // Mostra a resposta na página
-  resultado.replaceChildren();
-  resultado.appendChild(criarTexto("h2", titulo));
-  resultado.appendChild(criarTexto("p", introducao));
-
-  const lista = document.createElement("ul");
-
-  for (const passo of passos) {
-    lista.appendChild(criarTexto("li", passo));
-  }
-
-  resultado.appendChild(lista);
-  resultado.appendChild(
-    criarTexto(
-      "p",
-      "Sou um assistente baseado em respostas preparadas no site, não uma inteligência artificial. Minhas sugestões podem ajudar você a encontrar um próximo passo."
-    )
-  );
-
-  resultado.lastElementChild.className = "aviso";
-  resultado.style.display = "block";
-
-  ultimaResposta =
-    titulo + " " + introducao + " " + passos.join(" ");
-
-  statusTexto.textContent = "Resposta pronta!";
-
-  resultado.scrollIntoView({
-    behavior: "smooth",
-    block: "nearest"
-  });
-}
-
-    
+    campo.addEventListener("keydown", function(event) {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        gerarSolucao();
+      }
+    });
+  </script>
+</body>
+</html>
