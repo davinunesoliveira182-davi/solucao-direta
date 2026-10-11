@@ -1,11 +1,10 @@
 index.html
-
-```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Solução Direta</title>
 
   <style>
@@ -17,20 +16,21 @@ index.html
 
     body {
       font-family: Arial, sans-serif;
-      background-color: #f3f6fc;
-      background-image: url("fundo.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
       color: #172033;
       min-height: 100vh;
+      background-color: #edf4ff;
+      background-image:
+        linear-gradient(#f4f8ffb8, #f4f8ffb8),
+        url("fundo.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
     }
 
     main {
-      max-width: 850px;
-      margin: 65px auto;
-      padding: 0 20px;
+      width: min(850px, 100%);
+      margin: auto;
+      padding: 65px 20px 25px;
     }
 
     .introducao {
@@ -40,13 +40,13 @@ index.html
 
     .etiqueta {
       display: inline-block;
-      background: #e2eaff;
-      color: #2458e6;
-      padding: 8px 14px;
+      padding: 9px 16px;
+      margin-bottom: 20px;
       border-radius: 30px;
+      background: #e1ebff;
+      color: #2458e6;
       font-size: 13px;
       font-weight: bold;
-      margin-bottom: 20px;
     }
 
     h1 {
@@ -60,34 +60,36 @@ index.html
     }
 
     .introducao p {
-      color: #45516a;
+      color: #52617a;
       font-size: 17px;
       line-height: 1.7;
     }
 
     .painel {
-      background: #ffffff;
       padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 12px 40px #17203318;
-      border: 1px solid #e8edf5;
+      background: #ffffff;
+      border: 1px solid #dce7f8;
+      border-radius: 22px;
+      box-shadow: 0 15px 45px #244a8a18;
     }
 
     label {
       display: block;
-      font-weight: bold;
       margin-bottom: 12px;
+      font-weight: bold;
+      font-size: 17px;
     }
 
     textarea {
       width: 100%;
       min-height: 145px;
       padding: 16px;
-      border: 1px solid #d8deea;
-      border-radius: 12px;
+      border: 1px solid #cbd7ea;
+      border-radius: 13px;
       resize: vertical;
       font: inherit;
       font-size: 16px;
+      line-height: 1.6;
       outline: none;
     }
 
@@ -97,97 +99,111 @@ index.html
     }
 
     .dica {
-      color: #788398;
+      margin: 12px 0 20px;
+      color: #718096;
       font-size: 13px;
-      line-height: 1.5;
-      margin: 10px 0 20px;
+      line-height: 1.6;
     }
 
     button {
       width: 100%;
-      border: none;
-      border-radius: 12px;
       padding: 16px;
-      background: #2458e6;
+      border: none;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #3975f6, #214bd0);
       color: white;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     button:hover {
-      background: #1945c4;
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px #2458e640;
     }
 
     #resultado {
       display: none;
       margin-top: 25px;
       padding: 22px;
-      background: #f3f7ff;
-      border-radius: 14px;
-      border: 1px solid #dce6ff;
+      border: 1px solid #d6e4ff;
+      border-radius: 15px;
+      background: #f4f8ff;
     }
 
     #resultado h2 {
-      font-size: 21px;
       margin-bottom: 14px;
+      font-size: 22px;
+      color: #2458e6;
     }
 
     #resultado p {
-      line-height: 1.7;
       margin-bottom: 12px;
       color: #45516a;
+      line-height: 1.7;
     }
 
     #resultado ul {
       padding-left: 22px;
+      margin-bottom: 16px;
       line-height: 1.9;
     }
 
     footer {
+      padding: 25px 15px;
       text-align: center;
-      padding: 25px;
-      color: #45516a;
+      color: #52617a;
       font-size: 13px;
     }
 
     @media (max-width: 500px) {
       main {
-        margin: 40px auto;
+        padding: 40px 15px 20px;
       }
 
       .painel {
         padding: 20px;
+      }
+
+      .introducao p {
+        font-size: 16px;
       }
     }
   </style>
 </head>
 
 <body>
+
   <main>
     <section class="introducao">
-      <div class="etiqueta">SEU PRÓXIMO PASSO COMEÇA AQUI</div>
+      <div class="etiqueta">
+        SEU PRÓXIMO PASSO COMEÇA AQUI
+      </div>
 
-      <h1>Todo problema merece uma <span>solução.</span></h1>
+      <h1>
+        Todo problema merece uma
+        <span>solução.</span>
+      </h1>
 
       <p>
-        Conte o que está acontecendo. Organize suas ideias
+        Conte o que está acontecendo, organize suas ideias
         e descubra possíveis caminhos para seguir em frente.
       </p>
     </section>
 
     <section class="painel">
-      <label for="problema">Qual problema você quer resolver?</label>
+      <label for="problema">
+        Qual problema você quer resolver?
+      </label>
 
       <textarea
         id="problema"
-        placeholder="Ex.: Tenho dificuldade para organizar meu tempo e terminar minhas tarefas..."
+        placeholder="Ex.: Tenho dificuldade para organizar meu tempo..."
       ></textarea>
 
       <p class="dica">
-        Dica: explique o que acontece e o que você gostaria de mudar.
+        Explique o que acontece e o que gostaria de mudar.
         Não inclua senhas nem informações pessoais.
       </p>
 
@@ -210,16 +226,16 @@ index.html
       const problema = campo.value.trim().toLowerCase();
 
       if (problema.length < 5) {
-        alert("Conte um pouco mais sobre o problema para receber sugestões.");
+        alert("Escreva um pouco mais sobre o problema.");
         campo.focus();
         return;
       }
 
       let sugestoes = [
-        "Divida o problema em partes menores e mais fáceis de resolver.",
-        "Escolha uma ação simples que você possa começar hoje.",
+        "Divida o problema em partes menores.",
+        "Escolha uma ação simples para começar hoje.",
         "Defina um prazo realista para dar o primeiro passo.",
-        "Avalie o resultado e ajuste seu plano se necessário."
+        "Veja o que funcionou e ajuste seu plano."
       ];
 
       if (
@@ -229,10 +245,10 @@ index.html
         problema.includes("procrastin")
       ) {
         sugestoes = [
-          "Anote todas as tarefas que precisa realizar.",
+          "Anote as tarefas que precisa realizar.",
           "Escolha as três tarefas mais importantes do dia.",
-          "Reserve 25 minutos para começar uma tarefa sem distrações.",
-          "Faça pequenas pausas e revise seu progresso no fim do dia."
+          "Tente trabalhar por 25 minutos sem distrações.",
+          "Faça pausas curtas e revise seu progresso."
         ];
       } else if (
         problema.includes("dinheiro") ||
@@ -240,10 +256,10 @@ index.html
         problema.includes("econom")
       ) {
         sugestoes = [
-          "Anote o dinheiro que entra e os gastos que você tem.",
-          "Separe o que é necessário daquilo que pode esperar.",
-          "Defina uma meta de economia que seja realista.",
-          "Converse com um adulto de confiança antes de assumir compromissos financeiros."
+          "Anote seus gastos e o dinheiro disponível.",
+          "Separe o que é necessário do que pode esperar.",
+          "Defina uma meta de economia realista.",
+          "Peça orientação a um adulto de confiança antes de assumir compromissos financeiros."
         ];
       } else if (
         problema.includes("estudar") ||
@@ -252,10 +268,10 @@ index.html
         problema.includes("aprender")
       ) {
         sugestoes = [
-          "Identifique a matéria ou o assunto que está mais difícil.",
+          "Identifique o assunto que está mais difícil.",
           "Estude um tópico por vez em sessões curtas.",
-          "Pratique com exercícios e explique o conteúdo com suas próprias palavras.",
-          "Peça ajuda a um professor ou colega se continuar com dúvidas."
+          "Pratique com exercícios e explique o conteúdo com suas palavras.",
+          "Peça ajuda a um professor se continuar com dúvidas."
         ];
       } else if (
         problema.includes("trabalho") ||
@@ -265,24 +281,40 @@ index.html
         problema.includes("empresa")
       ) {
         sugestoes = [
-          "Defina claramente qual problema você quer resolver.",
-          "Converse com pessoas que enfrentam esse problema para entender suas necessidades.",
-          "Crie uma versão simples da sua ideia antes de investir dinheiro.",
-          "Peça opiniões, melhore a solução e teste novamente."
+          "Defina claramente o problema que quer resolver.",
+          "Converse com pessoas que enfrentam esse problema.",
+          "Teste uma versão simples da sua ideia.",
+          "Peça opiniões e melhore sua solução."
         ];
       }
 
+      resultado.replaceChildren();
+
+      const titulo = document.createElement("h2");
+      titulo.textContent = "Seu plano de ação 💡";
+      resultado.appendChild(titulo);
+
+      const texto = document.createElement("p");
+      texto.textContent =
+        "Aqui estão algumas ideias para você começar:";
+      resultado.appendChild(texto);
+
+      const lista = document.createElement("ul");
+
+      sugestoes.forEach(function(item) {
+        const li = document.createElement("li");
+        li.textContent = item;
+        lista.appendChild(li);
+      });
+
+      resultado.appendChild(lista);
+
+      const aviso = document.createElement("p");
+      aviso.textContent =
+        "Estas são sugestões iniciais. Escolha o que faz sentido para sua situação e peça ajuda a alguém de confiança quando necessário.";
+      resultado.appendChild(aviso);
+
       resultado.style.display = "block";
-      resultado.innerHTML = `
-        <h2>Seu plano de ação 💡</h2>
-        <p>Você já começou ao identificar o problema. Veja algumas ideias para dar os próximos passos:</p>
-        <ul>
-          ${sugestoes.map(item => `<li>${item}</li>`).join("")}
-        </ul>
-        <p><strong>Importante:</strong> estas são sugestões iniciais.
-        Avalie o que faz sentido para sua situação e procure ajuda
-        de alguém de confiança quando necessário.</p>
-      `;
 
       resultado.scrollIntoView({
         behavior: "smooth",
@@ -290,6 +322,7 @@ index.html
       });
     }
   </script>
+
 </body>
 </html>
 ```
