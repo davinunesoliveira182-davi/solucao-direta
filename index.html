@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Solução Direta</title>
 
   <style>
@@ -30,18 +29,18 @@
     main {
       width: min(850px, 100%);
       margin: auto;
-      padding: 65px 20px 25px;
+      padding: 45px 20px 25px;
     }
 
-    .introducao {
+    header {
       text-align: center;
-      margin-bottom: 35px;
+      margin-bottom: 30px;
     }
 
     .etiqueta {
       display: inline-block;
       padding: 9px 16px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       border-radius: 30px;
       background: #e1ebff;
       color: #2458e6;
@@ -51,23 +50,22 @@
 
     h1 {
       font-size: clamp(32px, 6vw, 48px);
-      line-height: 1.15;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     h1 span {
       color: #2458e6;
     }
 
-    .introducao p {
+    header p {
       color: #52617a;
       font-size: 17px;
       line-height: 1.7;
     }
 
     .painel {
-      padding: 30px;
-      background: #ffffff;
+      padding: 28px;
+      background: white;
       border: 1px solid #dce7f8;
       border-radius: 22px;
       box-shadow: 0 15px 45px #244a8a18;
@@ -90,16 +88,14 @@
       font: inherit;
       font-size: 16px;
       line-height: 1.6;
-      outline: none;
     }
 
     textarea:focus {
-      border-color: #2458e6;
-      box-shadow: 0 0 0 3px #2458e620;
+      outline: 2px solid #3975f6;
     }
 
     .dica {
-      margin: 12px 0 20px;
+      margin: 12px 0 18px;
       color: #718096;
       font-size: 13px;
       line-height: 1.6;
@@ -107,25 +103,38 @@
 
     button {
       width: 100%;
-      padding: 16px;
+      padding: 15px;
+      margin-top: 9px;
       border: none;
-      border-radius: 13px;
-      background: linear-gradient(135deg, #3975f6, #214bd0);
+      border-radius: 12px;
+      background: #2458e6;
       color: white;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: bold;
       cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px #2458e640;
+      filter: brightness(1.08);
+    }
+
+    .microfone,
+    .audio,
+    .parar {
+      background: #e8efff;
+      color: #214bd0;
+    }
+
+    #status {
+      margin-top: 13px;
+      color: #52617a;
+      font-size: 13px;
+      line-height: 1.6;
     }
 
     #resultado {
       display: none;
-      margin-top: 25px;
+      margin-top: 24px;
       padding: 22px;
       border: 1px solid #d6e4ff;
       border-radius: 15px;
@@ -133,14 +142,13 @@
     }
 
     #resultado h2 {
-      margin-bottom: 14px;
-      font-size: 22px;
+      margin-bottom: 13px;
       color: #2458e6;
+      font-size: 22px;
     }
 
     #resultado p {
-      margin-bottom: 12px;
-      color: #45516a;
+      margin-bottom: 13px;
       line-height: 1.7;
     }
 
@@ -148,6 +156,11 @@
       padding-left: 22px;
       margin-bottom: 16px;
       line-height: 1.9;
+    }
+
+    .aviso {
+      color: #52617a;
+      font-size: 13px;
     }
 
     footer {
@@ -159,38 +172,28 @@
 
     @media (max-width: 500px) {
       main {
-        padding: 40px 15px 20px;
+        padding: 30px 14px 20px;
       }
 
       .painel {
-        padding: 20px;
-      }
-
-      .introducao p {
-        font-size: 16px;
+        padding: 19px;
       }
     }
   </style>
 </head>
 
 <body>
-
   <main>
-    <section class="introducao">
-      <div class="etiqueta">
-        SEU PRÓXIMO PASSO COMEÇA AQUI
-      </div>
+    <header>
+      <div class="etiqueta">SEU PRÓXIMO PASSO COMEÇA AQUI</div>
 
-      <h1>
-        Todo problema merece uma
-        <span>solução.</span>
-      </h1>
+      <h1>Todo problema merece uma <span>solução.</span></h1>
 
       <p>
         Conte o que está acontecendo, organize suas ideias
         e descubra possíveis caminhos para seguir em frente.
       </p>
-    </section>
+    </header>
 
     <section class="painel">
       <label for="problema">
@@ -203,15 +206,31 @@
       ></textarea>
 
       <p class="dica">
-        Explique o que acontece e o que gostaria de mudar.
-        Não inclua senhas nem informações pessoais.
+        Você pode escrever ou usar o microfone.
+        Não informe senhas nem dados pessoais.
       </p>
 
-      <button onclick="gerarSolucao()">
+      <button id="resolver">
         Encontrar possíveis soluções →
       </button>
 
-      <div id="resultado" aria-live="polite"></div>
+      <button class="microfone" id="microfone">
+        🎤 Falar em vez de digitar
+      </button>
+
+      <button class="audio" id="ouvir">
+        🔊 Ouvir a resposta
+      </button>
+
+      <button class="parar" id="parar">
+        ⏹ Parar áudio
+      </button>
+
+      <p id="status" role="status" aria-live="polite">
+        Escreva sua mensagem ou toque no microfone para começar.
+      </p>
+
+      <section id="resultado" aria-live="polite"></section>
     </section>
   </main>
 
@@ -220,109 +239,320 @@
   </footer>
 
   <script>
-    function gerarSolucao() {
-      const campo = document.getElementById("problema");
-      const resultado = document.getElementById("resultado");
-      const problema = campo.value.trim().toLowerCase();
+    const campo = document.getElementById("problema");
+    const resultado = document.getElementById("resultado");
+    const statusTexto = document.getElementById("status");
 
-      if (problema.length < 5) {
-        alert("Escreva um pouco mais sobre o problema.");
+    let ultimaResposta = "";
+    let reconhecimento = null;
+
+    function normalizar(texto) {
+      return texto.toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "");
+    }
+
+    const assuntos = [
+      {
+        nome: "Estudos e escola",
+        palavras: ["estudar", "estudo", "prova", "escola", "aprender", "materia", "professor", "nota"],
+        inicio: "Vamos dividir os estudos em etapas menores.",
+        passos: [
+          "Identifique qual assunto está mais difícil.",
+          "Estude um tópico por vez durante 20 minutos.",
+          "Pratique com exercícios sem consultar a resposta imediatamente.",
+          "Peça ajuda a um professor se continuar com dúvidas."
+        ]
+      },
+      {
+        nome: "Tempo e organização",
+        palavras: ["tempo", "organizar", "tarefa", "rotina", "agenda", "atrasado", "procrastinar", "esquecer"],
+        inicio: "Uma rotina simples pode ajudar a deixar as tarefas mais claras.",
+        passos: [
+          "Anote as tarefas que precisa realizar.",
+          "Escolha as três prioridades mais importantes.",
+          "Comece por uma tarefa pequena.",
+          "Confira o que conseguiu fazer no final do dia."
+        ]
+      },
+      {
+        nome: "Dinheiro e economia",
+        palavras: ["dinheiro", "gastar", "economizar", "economia", "divida", "preco", "comprar", "orcamento"],
+        inicio: "Entender seus gastos é um bom primeiro passo.",
+        passos: [
+          "Anote o dinheiro disponível e os gastos.",
+          "Separe necessidades de compras que podem esperar.",
+          "Defina uma meta de economia realista.",
+          "Peça orientação a alguém de confiança antes de assumir compromissos financeiros."
+        ]
+      },
+      {
+        nome: "Trabalho e negócios",
+        palavras: ["trabalho", "emprego", "negocio", "cliente", "vender", "empresa", "curriculo", "chefe"],
+        inicio: "Vamos transformar a situação em ações que você pode testar.",
+        passos: [
+          "Defina qual resultado deseja alcançar.",
+          "Identifique o principal obstáculo.",
+          "Converse com alguém que conheça essa área.",
+          "Teste uma mudança pequena e observe o resultado."
+        ]
+      },
+      {
+        nome: "Tecnologia e programação",
+        palavras: ["computador", "celular", "internet", "site", "github", "codigo", "programar", "aplicativo", "erro", "wifi"],
+        inicio: "Problemas de tecnologia ficam mais fáceis quando você testa uma coisa por vez.",
+        passos: [
+          "Descreva o que acontece e anote a mensagem de erro.",
+          "Confira a conexão e atualize a página.",
+          "Mude apenas uma coisa por vez para identificar o problema.",
+          "Procure a documentação oficial se o erro continuar."
+        ]
+      },
+      {
+        nome: "Amizades e relacionamentos",
+        palavras: ["amigo", "amiga", "amizade", "relacionamento", "namoro", "briga", "familia", "discussao"],
+        inicio: "Conversar com respeito e entender seus limites pode ajudar.",
+        passos: [
+          "Pense no que aconteceu e em como você se sentiu.",
+          "Escolha um momento calmo para conversar, se for seguro.",
+          "Explique seu ponto de vista e escute o outro lado.",
+          "Se houver ameaça ou violência, procure ajuda de alguém de confiança."
+        ]
+      },
+      {
+        nome: "Estresse e motivação",
+        palavras: ["estresse", "ansioso", "ansiedade", "preocupado", "desanimado", "motivacao", "nervoso", "medo"],
+        inicio: "Você não precisa resolver tudo de uma vez. Comece por algo pequeno.",
+        passos: [
+          "Faça uma pausa e respire devagar por alguns instantes.",
+          "Anote o que está ao seu alcance mudar.",
+          "Escolha uma ação simples para hoje.",
+          "Converse com alguém de confiança se estiver difícil lidar com a situação."
+        ]
+      },
+      {
+        nome: "Casa e tarefas do dia a dia",
+        palavras: ["casa", "limpar", "limpeza", "quarto", "cozinha", "louca", "consertar"],
+        inicio: "Organizar as tarefas por etapas pode facilitar o dia a dia.",
+        passos: [
+          "Liste o que precisa ser feito.",
+          "Escolha o que é mais urgente.",
+          "Comece por uma tarefa pequena e segura.",
+          "Peça ajuda para tarefas que envolvam riscos ou ferramentas perigosas."
+        ]
+      }
+    ];
+
+    function criarTexto(tag, texto) {
+      const elemento = document.createElement(tag);
+      elemento.textContent = texto;
+      return elemento;
+    }
+
+    function gerarSolucao() {
+      const mensagem = campo.value.trim();
+
+      if (mensagem.length < 5) {
+        statusTexto.textContent =
+          "Escreva ou diga um pouco mais sobre o problema.";
         campo.focus();
         return;
       }
 
-      let sugestoes = [
-        "Divida o problema em partes menores.",
-        "Escolha uma ação simples para começar hoje.",
-        "Defina um prazo realista para dar o primeiro passo.",
-        "Veja o que funcionou e ajuste seu plano."
-      ];
+      const texto = normalizar(mensagem);
 
-      if (
-        problema.includes("tempo") ||
-        problema.includes("organizar") ||
-        problema.includes("tarefa") ||
-        problema.includes("procrastin")
-      ) {
-        sugestoes = [
-          "Anote as tarefas que precisa realizar.",
-          "Escolha as três tarefas mais importantes do dia.",
-          "Tente trabalhar por 25 minutos sem distrações.",
-          "Faça pausas curtas e revise seu progresso."
-        ];
-      } else if (
-        problema.includes("dinheiro") ||
-        problema.includes("gastar") ||
-        problema.includes("econom")
-      ) {
-        sugestoes = [
-          "Anote seus gastos e o dinheiro disponível.",
-          "Separe o que é necessário do que pode esperar.",
-          "Defina uma meta de economia realista.",
-          "Peça orientação a um adulto de confiança antes de assumir compromissos financeiros."
-        ];
-      } else if (
-        problema.includes("estudar") ||
-        problema.includes("prova") ||
-        problema.includes("escola") ||
-        problema.includes("aprender")
-      ) {
-        sugestoes = [
-          "Identifique o assunto que está mais difícil.",
-          "Estude um tópico por vez em sessões curtas.",
-          "Pratique com exercícios e explique o conteúdo com suas palavras.",
-          "Peça ajuda a um professor se continuar com dúvidas."
-        ];
-      } else if (
-        problema.includes("trabalho") ||
-        problema.includes("negócio") ||
-        problema.includes("cliente") ||
-        problema.includes("vender") ||
-        problema.includes("empresa")
-      ) {
-        sugestoes = [
-          "Defina claramente o problema que quer resolver.",
-          "Converse com pessoas que enfrentam esse problema.",
-          "Teste uma versão simples da sua ideia.",
-          "Peça opiniões e melhore sua solução."
-        ];
+      let tema = null;
+      let maiorPontuacao = 0;
+
+      for (const assunto of assuntos) {
+        let pontos = 0;
+
+        for (const palavra of assunto.palavras) {
+          if (texto.includes(normalizar(palavra))) {
+            pontos += palavra.length >= 7 ? 2 : 1;
+          }
+        }
+
+        if (pontos > maiorPontuacao) {
+          maiorPontuacao = pontos;
+          tema = assunto;
+        }
       }
 
+      const titulo = tema
+        ? tema.nome
+        : "Ideias para começar";
+
+      const introducao = tema
+        ? tema.inicio
+        : "Ainda não reconheci um assunto específico. Estas ideias gerais podem ajudar você a organizar o próximo passo.";
+
+      const passos = tema
+        ? tema.passos
+        : [
+            "Descreva o que está acontecendo e o que gostaria de mudar.",
+            "Separe o problema em partes menores.",
+            "Escolha uma ação simples e segura para começar.",
+            "Observe o resultado e ajuste seu plano, se necessário."
+          ];
+
       resultado.replaceChildren();
-
-      const titulo = document.createElement("h2");
-      titulo.textContent = "Seu plano de ação 💡";
-      resultado.appendChild(titulo);
-
-      const texto = document.createElement("p");
-      texto.textContent =
-        "Aqui estão algumas ideias para você começar:";
-      resultado.appendChild(texto);
+      resultado.appendChild(
+        criarTexto("h2", "Sugestões: " + titulo + " 💡")
+      );
+      resultado.appendChild(criarTexto("p", introducao));
 
       const lista = document.createElement("ul");
 
-      sugestoes.forEach(function(item) {
-        const li = document.createElement("li");
-        li.textContent = item;
-        lista.appendChild(li);
-      });
+      for (const passo of passos) {
+        lista.appendChild(criarTexto("li", passo));
+      }
 
       resultado.appendChild(lista);
 
-      const aviso = document.createElement("p");
-      aviso.textContent =
-        "Estas são sugestões iniciais. Escolha o que faz sentido para sua situação e peça ajuda a alguém de confiança quando necessário.";
-      resultado.appendChild(aviso);
+      resultado.appendChild(
+        criarTexto(
+          "p",
+          "Estas são sugestões preparadas no site, não respostas de uma IA. Escolha o que fizer sentido para sua situação."
+        )
+      );
 
+      resultado.lastElementChild.className = "aviso";
       resultado.style.display = "block";
+
+      ultimaResposta =
+        "Sugestões para " + titulo + ". " +
+        introducao + " " +
+        passos.map((passo, i) =>
+          "Passo " + (i + 1) + ": " + passo
+        ).join(" ");
+
+      statusTexto.textContent = tema
+        ? "Encontrei sugestões para: " + titulo + "."
+        : "Mostrei sugestões gerais. Tente explicar o assunto com mais detalhes para receber sugestões mais específicas.";
 
       resultado.scrollIntoView({
         behavior: "smooth",
         block: "nearest"
       });
     }
-  </script>
 
+    document.getElementById("resolver")
+      .addEventListener("click", gerarSolucao);
+
+    document.getElementById("microfone")
+      .addEventListener("click", function () {
+        const API =
+          window.SpeechRecognition ||
+          window.webkitSpeechRecognition;
+
+        if (!API) {
+          statusTexto.textContent =
+            "O reconhecimento de voz não está disponível neste navegador. Tente o Chrome atualizado ou digite sua mensagem.";
+          return;
+        }
+
+        if (reconhecimento) {
+          reconhecimento.stop();
+          reconhecimento = null;
+        }
+
+        reconhecimento = new API();
+        reconhecimento.lang = "pt-BR";
+        reconhecimento.continuous = false;
+        reconhecimento.interimResults = false;
+
+        reconhecimento.onstart = function () {
+          statusTexto.textContent =
+            "Estou ouvindo! Fale agora.";
+          document.getElementById("microfone").textContent =
+            "🎙️ Estou ouvindo...";
+        };
+
+        reconhecimento.onresult = function (evento) {
+          const fala = evento.results[0][0].transcript;
+
+          campo.value =
+            (campo.value.trim() ? campo.value.trim() + " " : "") +
+            fala;
+
+          statusTexto.textContent =
+            "Entendi: " + fala +
+            ". Agora clique em Encontrar possíveis soluções.";
+        };
+
+        reconhecimento.onerror = function (evento) {
+          if (evento.error === "not-allowed") {
+            statusTexto.textContent =
+              "O microfone foi bloqueado. Permita o acesso nas configurações do navegador.";
+          } else if (evento.error === "no-speech") {
+            statusTexto.textContent =
+              "Não ouvi sua voz. Tente novamente em um lugar mais silencioso.";
+          } else {
+            statusTexto.textContent =
+              "Não consegui reconhecer a voz. Tente novamente ou digite sua mensagem.";
+          }
+        };
+
+        reconhecimento.onend = function () {
+          reconhecimento = null;
+          document.getElementById("microfone").textContent =
+            "🎤 Falar em vez de digitar";
+        };
+
+        try {
+          reconhecimento.start();
+        } catch (erro) {
+          reconhecimento = null;
+          statusTexto.textContent =
+            "Não consegui iniciar o microfone. Tente novamente.";
+        }
+      });
+
+    document.getElementById("ouvir")
+      .addEventListener("click", function () {
+        if (!("speechSynthesis" in window)) {
+          statusTexto.textContent =
+            "A leitura em voz alta não está disponível neste navegador.";
+          return;
+        }
+
+        if (!ultimaResposta) {
+          statusTexto.textContent =
+            "Primeiro escreva ou dite uma mensagem e clique em Encontrar possíveis soluções.";
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+
+        const fala = new SpeechSynthesisUtterance(ultimaResposta);
+        fala.lang = "pt-BR";
+        fala.rate = 0.95;
+
+        fala.onstart = function () {
+          statusTexto.textContent = "Lendo a resposta em voz alta...";
+        };
+
+        fala.onend = function () {
+          statusTexto.textContent = "Leitura concluída.";
+        };
+
+        window.speechSynthesis.speak(fala);
+      });
+
+    document.getElementById("parar")
+      .addEventListener("click", function () {
+        if ("speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+        }
+
+        if (reconhecimento) {
+          reconhecimento.stop();
+        }
+
+        statusTexto.textContent = "Áudio parado.";
+      });
+  </script>
 </body>
 </html>
-```
+
