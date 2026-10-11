@@ -1,0 +1,324 @@
+index.html  
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solução Direta | Transformando problemas em soluções</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f3f6fc;
+      color: #172033;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #ffffff;
+      padding: 22px 8%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e5eaf3;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: bold;
+      color: #2458e6;
+    }
+
+    .logo span {
+      color: #172033;
+    }
+
+    .selo {
+      color: #2458e6;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    main {
+      max-width: 850px;
+      margin: 65px auto;
+      padding: 0 20px;
+    }
+
+    .introducao {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .etiqueta {
+      display: inline-block;
+      background: #e2eaff;
+      color: #2458e6;
+      padding: 8px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: clamp(32px, 6vw, 48px);
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    h1 span {
+      color: #2458e6;
+    }
+
+    .introducao p {
+      color: #647087;
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .painel {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 12px 40px #1720330c;
+      border: 1px solid #e8edf5;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 145px;
+      padding: 16px;
+      border: 1px solid #d8deea;
+      border-radius: 12px;
+      resize: vertical;
+      font: inherit;
+      font-size: 16px;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: #2458e6;
+      box-shadow: 0 0 0 3px #2458e620;
+    }
+
+    .dica {
+      color: #788398;
+      font-size: 13px;
+      margin: 10px 0 20px;
+    }
+
+    button {
+      width: 100%;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      background: #2458e6;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #1945c4;
+      transform: translateY(-1px);
+    }
+
+    #resultado {
+      display: none;
+      margin-top: 25px;
+      padding: 22px;
+      background: #f3f7ff;
+      border-radius: 14px;
+      border: 1px solid #dce6ff;
+    }
+
+    #resultado h2 {
+      font-size: 21px;
+      margin-bottom: 14px;
+    }
+
+    #resultado p {
+      line-height: 1.7;
+      margin-bottom: 12px;
+      color: #45516a;
+    }
+
+    #resultado ul {
+      padding-left: 22px;
+      line-height: 1.9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #788398;
+      font-size: 13px;
+    }
+
+    @media (max-width: 500px) {
+      header {
+        padding: 18px;
+      }
+
+      .selo {
+        font-size: 11px;
+      }
+
+      main {
+        margin: 40px auto;
+      }
+
+      .painel {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">Solução <span>Direta.</span></div>
+    <div class="selo">IDEIAS QUE AJUDAM</div>
+  </header>
+
+  <main>
+    <section class="introducao">
+      <div class="etiqueta">SEU PRÓXIMO PASSO COMEÇA AQUI</div>
+
+      <h1>Todo problema merece uma <span>solução.</span></h1>
+
+      <p>
+        Conte o que está acontecendo. Organize suas ideias
+        e descubra possíveis caminhos para seguir em frente.
+      </p>
+    </section>
+
+    <section class="painel">
+      <label for="problema">Qual problema você quer resolver?</label>
+
+      <textarea
+        id="problema"
+        placeholder="Ex.: Tenho dificuldade para organizar meu tempo e terminar minhas tarefas..."
+      ></textarea>
+
+      <p class="dica">
+        Dica: explique o que acontece e o que você gostaria de mudar.
+        Não inclua senhas nem informações pessoais.
+      </p>
+
+      <button onclick="gerarSolucao()">
+        Encontrar possíveis soluções →
+      </button>
+
+      <div id="resultado" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Solução Direta · Pequenos passos, grandes mudanças.
+  </footer>
+
+  <script>
+    function gerarSolucao() {
+      const campo = document.getElementById("problema");
+      const resultado = document.getElementById("resultado");
+      const problema = campo.value.trim().toLowerCase();
+
+      if (problema.length < 5) {
+        alert("Conte um pouco mais sobre o problema para receber sugestões.");
+        campo.focus();
+        return;
+      }
+
+      let sugestoes = [
+        "Divida o problema em partes menores e mais fáceis de resolver.",
+        "Escolha uma ação simples que você possa começar hoje.",
+        "Defina um prazo realista para dar o primeiro passo.",
+        "Avalie o resultado e ajuste seu plano se necessário."
+      ];
+
+      if (
+        problema.includes("tempo") ||
+        problema.includes("organizar") ||
+        problema.includes("tarefa") ||
+        problema.includes("procrastin")
+      ) {
+        sugestoes = [
+          "Anote todas as tarefas que precisa realizar.",
+          "Escolha as três tarefas mais importantes do dia.",
+          "Reserve 25 minutos para começar uma tarefa sem distrações.",
+          "Faça pequenas pausas e revise seu progresso no fim do dia."
+        ];
+      } else if (
+        problema.includes("dinheiro") ||
+        problema.includes("gastar") ||
+        problema.includes("econom")
+      ) {
+        sugestoes = [
+          "Anote o dinheiro que entra e os gastos que você tem.",
+          "Separe o que é necessário daquilo que pode esperar.",
+          "Defina uma meta de economia que seja realista.",
+          "Converse com um adulto de confiança antes de assumir compromissos financeiros."
+        ];
+      } else if (
+        problema.includes("estudar") ||
+        problema.includes("prova") ||
+        problema.includes("escola") ||
+        problema.includes("aprender")
+      ) {
+        sugestoes = [
+          "Identifique a matéria ou o assunto que está mais difícil.",
+          "Estude um tópico por vez em sessões curtas.",
+          "Pratique com exercícios e explique o conteúdo com suas próprias palavras.",
+          "Peça ajuda a um professor ou colega se continuar com dúvidas."
+        ];
+      } else if (
+        problema.includes("trabalho") ||
+        problema.includes("negócio") ||
+        problema.includes("cliente") ||
+        problema.includes("vender") ||
+        problema.includes("empresa")
+      ) {
+        sugestoes = [
+          "Defina claramente qual problema você quer resolver.",
+          "Converse com pessoas que enfrentam esse problema para entender suas necessidades.",
+          "Crie uma versão simples da sua ideia antes de investir dinheiro.",
+          "Peça opiniões, melhore a solução e teste novamente."
+        ];
+      }
+
+      resultado.style.display = "block";
+      resultado.innerHTML = `
+        <h2>Seu plano de ação 💡</h2>
+        <p>Você já começou ao identificar o problema. Veja algumas ideias para dar os próximos passos:</p>
+        <ul>
+          ${sugestoes.map(item => `<li>${item}</li>`).join("")}
+        </ul>
+        <p><strong>Importante:</strong> estas são sugestões iniciais.
+        Avalie o que faz sentido para sua situação e procure ajuda
+        de alguém de confiança quando necessário.</p>
+      `;
+
+      resultado.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+      });
+    }
+  </script>
+</body>
+</html>
